@@ -1,0 +1,51 @@
+﻿@page "{id}"
+@model API.Views.PostPageModel
+@{
+    Layout = "Shared/_Layout.cshtml";
+    ViewData["Title"] = "PostPage";
+}
+<div class="block-reg background-white" class="text-center">
+    <h2 class="center">@Model.post.Title</h2>
+
+    <div>
+        @foreach (var tag in Model.post.Tags)
+        {
+            <span class="badge bg-info text-dark" style="margin-block : 5px">@tag.TagName</span>
+        }
+    </div>
+
+    <div class="card bg-light mb-3" style="margin-block : 5px">
+        <h4> @Model.post.BodyText</h4>
+    </div>
+
+
+    <div">
+        <h3 class="center">
+            Комментарии</h2>
+    @foreach (var comment in Model.post.Comments)
+    {
+                <div class="card bg-light mb-3" style="margin-block : 5px">
+                    <div class="card-body">
+                        <h4 class="card-title">@comment.BodyText</h4>
+                        @*<p class="card-text"><h6>Время : @comment.Author.Login </h6></p>*@
+                        <p class="card-text"><h6>Время : @comment.CreateDate    </h6></p>
+                    </div>
+                </div>
+    }
+    </div">
+
+    <form class="frm" method="post" asp-controller="Comment" asp-action="CreateComment" asp-route-Id="@Model.article.Id">
+        <div asp-validation-summary="ModelOnly"></div>
+        <div>
+            <h6>Введите текст</h6>
+            <div class="mrgn">
+                <input asp-for="BodyText" class="form-control" />
+                <span asp-validation-for="BodyText" class="text-danger"></span>
+            </div>
+        </div>
+        <div>
+            <input class="enter_submit" type="submit" value="Добавить комментарий" />
+        </div>
+    </form>
+
+</div>
