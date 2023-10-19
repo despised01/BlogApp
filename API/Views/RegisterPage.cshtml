@@ -1,0 +1,57 @@
+﻿@page
+@model API.Models.ViewModels.RegistrationViewModel
+@{
+    Layout = "Shared/_Layout.cshtml";
+    ViewData["Title"] = "RegistrationPage";
+}
+<div class="block-reg background-white">
+    <h3 class="center">Регирстрация нового пользователя</h3>
+    <form class="frm" method="post" asp-controller="Account" asp-action="Registration">
+        <div asp-validation-summary="ModelOnly"></div>
+        <div>
+            <h6>Введите логин</h6>
+            <div class="mrgn">
+                <input asp-for="Login" class="form-control" />
+                <span asp-validation-for="Login" class="text-danger"></span>
+            </div>
+        </div>
+        <div>
+            <h6>Введите эл. полчту</h6>
+            <div class="mrgn">
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+        </div>
+        <div>
+            <h6>Введите пароль</h6>
+            <div class="mrgn">
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+        </div>
+        <div>
+            <h6>Введите пароль еще раз</h6>
+            <div class="mrgn">
+                <input asp-for="PasswordConfirm" class="form-control" />
+                <span asp-validation-for="PasswordConfirm" class="text-danger"></span>
+            </div>
+        </div>
+        <div>
+            <h6>Введите имя</h6>
+            <div class="mrgn">
+                <input asp-for="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+        </div>
+        <div>
+            <h6>Введите фамилию</h6>
+            <div class="mrgn">
+                <input asp-for="LastName" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+        </div>
+        <div>
+            <input class="enter_submit" type="submit" value="Зарегистрироваться" />
+        </div>
+    </form>
+</div>
