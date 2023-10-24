@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
 
-namespace API.Views
+namespace API.Views.Pages
 {
     public class UserUpdatePageModel : PageModel
     {
@@ -84,7 +84,7 @@ namespace API.Views
         public CheckRole(bool rememberMe, Role role)
         {
             RememberMe = rememberMe;
-            this.roleName = role.Name;
+            roleName = role.Name;
         }
 
         public CheckRole() { }

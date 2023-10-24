@@ -1,3 +1,4 @@
+using API.Views.Pages;
 using AutoMapper;
 using BlogApp.DLL.Models;
 using BlogApp.DLL.Repository.Interfaces;

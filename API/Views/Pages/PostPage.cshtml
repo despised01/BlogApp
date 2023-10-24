@@ -1,5 +1,6 @@
 ﻿@page "{id}"
-@model API.Views.PostPageModel
+@using API.Views.Pages;
+@model PostPageModel
 @{
     Layout = "Shared/_Layout.cshtml";
     ViewData["Title"] = "PostPage";
@@ -34,7 +35,7 @@
     }
     </div">
 
-    <form class="frm" method="post" asp-controller="Comment" asp-action="CreateComment" asp-route-Id="@Model.article.Id">
+    <form class="frm" method="post" asp-controller="Comment" asp-action="CreateComment" asp-route-Id="@Model.post.Id">
         <div asp-validation-summary="ModelOnly"></div>
         <div>
             <h6>Введите текст</h6>

@@ -1,0 +1,30 @@
+﻿@page
+@model API.Models.ViewModels.CreateTagViewModel
+@{
+    Layout = "Shared/_Layout.cshtml";
+    ViewData["Title"] = "AddTag";
+}
+
+<div class="block-reg background-white">
+    <h3 class="center">Добавление нового тэга</h3>
+    <form class="frm" method="post" asp-controller="Tag" asp-action="AddTag">
+        <div asp-validation-summary="ModelOnly"></div>
+        <div>
+            <h6>Введите название</h6>
+            <div class="mrgn">
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+        </div>
+        <div>
+            <h6>Введите описание</h6>
+            <div class="mrgn">
+                <input asp-for="Comment" class="form-control" />
+                <span asp-validation-for="Comment" class="text-danger"></span>
+            </div>
+        </div>
+        <div>
+            <input class="enter_submit" type="submit" value="Создать" />
+        </div>
+    </form>
+</div>

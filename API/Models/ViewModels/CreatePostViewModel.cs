@@ -1,9 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using API.Views.Pages;
+using System.ComponentModel.DataAnnotations;
 using System.Xml.Linq;
 
 namespace API.Models.ViewModels
 {
-	public class CreatePostViewModel
+    public class CreatePostViewModel
 	{
 		[Required]
 		[Display(Name = "Название", Prompt = "Введите название")]

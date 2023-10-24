@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel;
 
-namespace API.Views
+namespace API.Views.Pages
 {
     public class PostPageModel : PageModel
     {

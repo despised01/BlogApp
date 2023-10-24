@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
 
-namespace API.Views
+namespace API.Views.Pages
 {
     public class CreatePostPageModel : PageModel
     {
@@ -60,7 +60,7 @@ namespace API.Views
         public CheckTag(bool rememberMe, Tag tag)
         {
             RememberMe = rememberMe;
-            this.tagName = tag.TagName;
+            tagName = tag.TagName;
         }
 
         public CheckTag() { }

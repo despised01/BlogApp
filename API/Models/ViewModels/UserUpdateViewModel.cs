@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using API.Views.Pages;
+using System.ComponentModel.DataAnnotations;
 
 namespace API.Models.ViewModels
 {
-	public class UserUpdateViewModel
+    public class UserUpdateViewModel
 	{
 		[DataType(DataType.Text)]
 		public Guid Id { get; }

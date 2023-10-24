@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace API.Views
+namespace API.Views.Pages
 {
     public class RoleUpdatePageModel : PageModel
     {

@@ -5,6 +5,10 @@ using BlogApp.DLL.Repository.Interfaces;
 using BlogApp.DLL.Repository;
 using FluentValidation;
 using BlogApp.BLL.Validators;
+using BlogApp.Controllers;
+using API.Controllers;
+using NLog.Web;
+using NLog.Extensions.Logging;
 
 namespace BlogApp
 {
@@ -31,15 +35,22 @@ namespace BlogApp
 			builder.Services.AddTransient<IPostRepository, PostRepository>();
 			builder.Services.AddTransient<IRoleRepository, RoleRepository>();
 
-
 			builder.Services.AddTransient<IValidator<UserRequest>, UserRequestValidator>();
 			builder.Services.AddTransient<IValidator<TagRequest>, TagRequestValidator>();
 			builder.Services.AddTransient<IValidator<PostRequest>, PostRequestValidator>();
 			builder.Services.AddTransient<IValidator<CommentRequest>, CommentRequestValidator>();
 			builder.Services.AddTransient<IValidator<RoleRequest>, RoleRequestValidator>();
 
+            builder.Services.AddTransient<UserController, UserController>();
+            builder.Services.AddTransient<TagController, TagController>();
+            builder.Services.AddTransient<PostController, PostController>();
+            builder.Services.AddTransient<CommentController, CommentController>();
+            builder.Services.AddTransient<RoleController, RoleController>();
+            builder.Services.AddTransient<IAccountController, AccountController>();
 
-			builder.Services.AddAuthentication(options => options.DefaultScheme = "Cookies")
+
+
+            builder.Services.AddAuthentication(options => options.DefaultScheme = "Cookies")
 							.AddCookie("Cookies", options =>
 							{
 								options.Events = new Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationEvents
@@ -52,27 +63,56 @@ namespace BlogApp
 								};
 							});
 
-			builder.Services.AddControllers();
-			// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-			builder.Services.AddEndpointsApiExplorer();
-			builder.Services.AddSwaggerGen();
+            builder.Services.AddHttpContextAccessor();
 
-			var app = builder.Build();
+            // nLog
+            var logger = NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+            builder.Services.AddLogging(loggingBuilder =>
+            {
+                loggingBuilder.ClearProviders();
+                loggingBuilder.AddNLog();
+            });
 
-			// Configure the HTTP request pipeline.
-			if (app.Environment.IsDevelopment())
-			{
-				app.UseSwagger();
-				app.UseSwaggerUI();
-			}
+            builder.Services.AddControllers();
+            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen();
 
-			app.UseHttpsRedirection();
+            // Add services to the container.
+            builder.Services.AddRazorPages();
 
-			app.UseAuthorization();
+            var app = builder.Build();
 
-			app.MapControllers();
+            // Configure the HTTP request pipeline.
+            if (!app.Environment.IsDevelopment())
+            {
+                app.UseStatusCodePagesWithReExecute("/Errors/ErrorsRedirect", "?statusCode={0}");
+                app.UseExceptionHandler("/Errors/SomethingWrongPage");
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
 
-			app.Run();
-		}
+            }
+            if (app.Environment.IsDevelopment())
+            {
+                app.UseStatusCodePagesWithReExecute("/Errors/ErrorsRedirect", "?statusCode={0}");
+                app.UseExceptionHandler("/Errors/SomethingWrongPage");
+                app.UseSwagger();
+                app.UseSwaggerUI();
+            }
+
+
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
+
+            app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
+
+            app.MapControllers();
+            app.MapRazorPages();
+
+            app.Run();
+        }
 	}
 }
