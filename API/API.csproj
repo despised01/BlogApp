@@ -22,7 +22,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BlogApp.BLL\BlogApp.BLL.csproj" />
-    <ProjectReference Include="..\BlogAppBLL\BlogApp.BLL.csproj" />
     <ProjectReference Include="..\BlogAppDLL\BlogApp.DLL.csproj" />
   </ItemGroup>
 
