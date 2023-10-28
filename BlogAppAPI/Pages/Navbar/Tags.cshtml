@@ -1,0 +1,37 @@
+﻿@page
+@model API.Views.Navbar.TagsModel
+@{
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Тэги";
+}
+<div class="block-reg background-white">
+    <h4 class="center">Все тэги</h4>
+    <a type="button" asp-area=""
+       asp-controller="Tag" asp-action="CreateTag">
+        Добавить тэг
+    </a>
+    @foreach (var tag in Model.tags)
+    {
+        <div class="card bg-light mb-3" style="width: 15rem;">
+            <div class="card-body">
+                <h4 class="card-title">@tag.TagName</h4>
+                <p class="card-text"><h6>Статей по тегу : @tag.Posts.Count</h6></p>
+                @if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
+                {
+                    <a type="button" class="btn btn-primary" asp-area="" asp-controller="Tag" asp-action="GetTagToUpdate" asp-route-Id="@tag.Id">Редактировать</a>
+                }
+            </div>
+        </div>
+    }
+
+</div>
+
+<style type="text/css">
+    .Block {
+        width: 600px;
+        padding: 5px;
+        padding-right: 30px;
+        margin: 5px;
+        border: solid 1px black;
+    }
+</style>

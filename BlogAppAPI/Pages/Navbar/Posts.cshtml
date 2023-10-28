@@ -1,0 +1,49 @@
+﻿@page
+@model API.Views.Navbar.PostsModel
+@{
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Статьи";
+}
+<div class="block-reg background-white" class="text-center">
+    <h4 class="center">Все статьи</h4>
+    <a type="button" asp-area=""
+       asp-controller="Post" asp-action="CreatePostRedirect">
+        Добавить статью
+    </a>
+    <div>
+        @foreach (var post in Model.posts)
+        {
+            <div class="card bg-light mb-3" style="width: 20rem;">
+                <div class="card-body">
+                    <h4 class="card-title">@post.Title</h4>
+                    @foreach (var tags in post.Tags)
+                    {
+                        <span class="badge bg-info text-dark">@tags.TagName</span>
+                    }
+                    <div><br /></div>
+                    <div class="btn-group btn-group-sm" role="group" aria-label="Small button group">
+                        <a type="button" class="btn btn-primary" asp-area=""
+                           asp-controller="Post" asp-action="PostOpen" asp-route-Id="@post.Id">
+                            Просмотреть
+                        </a>
+                        @if ((User.Identity.IsAuthenticated && @post.Author != null && User.Identity.Name == @post.Author.Login) ||
+                       User.IsInRole("Admin") || User.IsInRole("Moderator"))
+                        {
+                            <a type="button" class="btn btn-info" asp-area=""
+                               asp-controller="Post" asp-action="GetPostToUpdate" asp-route-Id="@post.Id">
+                                Редактировать
+                            </a>
+
+                            <a type="button" class="btn btn-warning" asp-area=""
+                               asp-controller="Post" asp-action="PostToDelete" asp-route-Id="@post.Id">
+                                Удалить
+                            </a>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+
+
+    </div>
+</div>

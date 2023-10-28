@@ -1,0 +1,9 @@
+﻿@page
+@model API.Views.Home.IndexModel
+@{
+    Layout = "Shared/_Layout.cshtml";
+    ViewData["Title"] = "Welcome";
+}
+
+<h2>Вы уже зарегестрированны? <a asp-area="" asp-page="LoginPage">Войти</a></h2>
+<h2>Вы не зарегестрированны? <a asp-area="" asp-page="RegistrationPage">Регистрация</a></h2>

@@ -1,0 +1,37 @@
+﻿@page "{id}"
+@using API.Views.Pages;
+@model RoleUpdatePageModel
+@{
+    Layout = "Shared/_Layout.cshtml";
+    ViewData["Title"] = "RoleUpdate";
+}
+@if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
+{
+    <div class="block-reg background-white">
+        <h3 class="center">Редактирование роли</h3>
+        <form class="frm" method="post" asp-controller="Role" asp-action="RoleUpdateById" asp-route-id="@Model.Id">
+            <div asp-validation-summary="ModelOnly"></div>
+            <div>
+                <h6>Введите название</h6>
+                <div class="mrgn">
+                    <input asp-for="Name" class="form-control" value="@Model.role.Name" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+            </div>
+            <div>
+                <h6>Введите описание</h6>
+                <div class="mrgn">
+                    <input asp-for="Comment" class="form-control" value="@Model.role.Description" />
+                    <span asp-validation-for="Comment" class="text-danger"></span>
+                </div>
+            </div>
+            <div>
+                <input class="enter_submit" type="submit" value="Создать" />
+            </div>
+        </form>
+    </div>
+}
+else
+{
+    <h2>Нет прав</h2>
+}

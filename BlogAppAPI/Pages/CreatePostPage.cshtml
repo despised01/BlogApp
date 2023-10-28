@@ -1,0 +1,40 @@
+﻿@page
+@using API.Views.Pages;
+@model CreatePostPageModel
+@{
+    Layout = "Shared/_Layout.cshtml";
+    ViewData["Title"] = "AddPost";
+}
+<div class="block-reg background-white">
+    <h4 class="center">Добавление статьи</h4>
+    <form method="post" asp-controller="Post" asp-action="AddPost">
+        <div asp-validation-summary="ModelOnly"></div>
+        <h5 class="center">Выберите тэги</h5>
+        <div>
+            @for (int i = 0; i < Model.CheckTags.Count; i++)
+            {
+                <input type="checkbox" asp-for="@Model.CheckTags[i].RememberMe"
+                       value="true" />
+                <input type="hidden" asp-for="@Model.CheckTags[i].tagName"
+                       value="@Model.CheckTags[i].tagName" />
+                <label>@Model.CheckTags[i].tagName</label>
+            }
+
+            <h5>Введите заголовок</h5>
+            <div class="mrgn">
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div>
+                <h5>Введите контент</h5>
+                <div class="mrgn">
+                    <textarea asp-for="PostBody" class="form-control" rows="10"> </textarea>
+                    <span asp-validation-for="PostBody" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <input type="submit" value="Создать" />
+        </div>
+    </form>
+</div>
