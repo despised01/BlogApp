@@ -25,5 +25,10 @@ namespace BlogApp.DLL.Context
         {
             base.OnModelCreating(builder);
         }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlite("Data Source=BlogAppDB.db");
+        }
     }
 }
