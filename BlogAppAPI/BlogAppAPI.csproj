@@ -23,6 +23,7 @@
   <ItemGroup>
     <ProjectReference Include="..\BlogApp.BLL\BlogApp.BLL.csproj" />
     <ProjectReference Include="..\BlogAppDLL\BlogApp.DLL.csproj" />
+    <ProjectReference Include="..\BlogAppIdentity\BlogAppIdentity.csproj" />
   </ItemGroup>
 
   <ItemGroup>

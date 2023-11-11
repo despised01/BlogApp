@@ -1,4 +1,9 @@
-﻿@page
+﻿@using BlogAppIdentity.Models;
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
 @model API.Views.Home.IndexModel
 @{
     Layout = "Shared/_Layout.cshtml";
